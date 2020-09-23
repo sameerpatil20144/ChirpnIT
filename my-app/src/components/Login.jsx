@@ -34,10 +34,10 @@ class Login extends Component{
         
         axios.post('http://localhost:9000/users/login',data)
         .then(res => {
-            localStorage.setItem("JWT token", res.data.token);
-            localStorage.setItem("type", res.data.user.type);
             if(res.data.success===true){
-                this.setState({success: true});
+                this.setState({success: res.data.success});
+                localStorage.setItem("JWT token", res.data.token);
+                localStorage.setItem("type", res.data.user.type);
             }
             else{
                 toast.error('Invalid Email or Invalid Password', {
@@ -49,7 +49,6 @@ class Login extends Component{
                     draggable: true
                     });
             }
-        
     })
         console.log('The form was submitted with the following data:',this.state);
     }

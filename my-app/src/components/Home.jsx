@@ -76,6 +76,7 @@ class Home extends Component{
             this.setState({data:res.data})
         })
       }
+
     render(){
         if( localStorage.getItem('JWT token')===undefined||localStorage.getItem('JWT token')===null){
             return <Redirect to="/" />;
@@ -97,7 +98,10 @@ class Home extends Component{
                         <div className="container">
                             <div className="row">
                                 <div className="col">
-                                    <button className="btn btn-md btn-primary btn-block signin-btn">Add Todo</button>
+                                {
+                                    localStorage.getItem('type')==="admin"?<button className="btn btn-md btn-primary btn-block signin-btn" >Add Todo</button>:null
+                                }
+                                   
                                 </div>
                             </div>
                         </div>
