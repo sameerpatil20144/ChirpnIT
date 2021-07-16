@@ -5,6 +5,24 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/database");
 const User = require("../models/user");
 const cryptoRandomString = require('crypto-random-string');
+const axios = require('axios')
+
+function challenge1(){
+	
+	let resp = axios.get()
+	let data = resp.data
+	let arr = data.split(",");
+	let output =[]
+	for (let index =1;index<arr.length;index+=2){
+		let age = parseInt(arr[index].split("=")[1])
+		if (age ===32){
+			output.push({key:arr[index-1].split("=")[1],age:32})
+		}
+	}
+	console.log(output)
+}
+
+challenge1()
 ("use strict");
 
 router.post('/', (req, res) => {
@@ -34,7 +52,7 @@ router.post('/', (req, res) => {
             return res.status(500).json({ error: err });
         }
         else if (user) {
-            return res.json({ success: false, msg: "Email already registered with CannDollar" });
+            return res.json({ success: false, msg: "Email already registered" });
         }
         else {
             let newUser = new User({
